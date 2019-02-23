@@ -1,5 +1,6 @@
 #include <stdlib.h>
 #include <stdbool.h>
+#include <string.h>
 #include <stdio.h>
 #include <math.h>
 #include "esviji.h"
@@ -12,7 +13,7 @@ static void appendstringtosvg(Svg *pSvg, char *text)
 	if (newtext != NULL) {
 		pSvg->svg = newtext;
 	}
-	strcat(pSvg->svg, length);
+	strcat(pSvg->svg, text);
 }
 
 static void appendnumbertosvg(Svg *pSvg, int n)
@@ -23,11 +24,11 @@ static void appendnumbertosvg(Svg *pSvg, int n)
 }
 
 // Exposed functions
-Svg *create(int width, int height)
+Svg *svg_create(int width, int height)
 {
 	Svg *pSvg = malloc(sizeof(Svg));
 	if (pSvg != NULL) {
-		*pSvg = (Svg){.svg = NULL, .width = width, .height = height, finalized = false};
+		*pSvg = (Svg){.svg = NULL, .width = width, .height = height, .finalized = false};
 		pSvg->svg = malloc(1);
 		sprintf(pSvg->svg, "%s", "\0");
 		
@@ -35,7 +36,7 @@ Svg *create(int width, int height)
 		appendnumbertosvg(pSvg, width);
 		appendstringtosvg(pSvg, "px' height='");
 		appendnumbertosvg(pSvg, height);
-		appendstringtosvg(pSvg, "px', xmlns='http://www.w3.org/2000/svg' version='1.1' xmlns:xlink='http://www.w3.org/1999/xlink'>\n");
+		appendstringtosvg(pSvg, "px' xmlns='http://www.w3.org/2000/svg' version='1.1' xmlns:xlink='http://www.w3.org/1999/xlink'>\n");
 		
 		return pSvg;
 	} else {
@@ -46,7 +47,7 @@ Svg *create(int width, int height)
 void svg_finalize(Svg *pSvg)
 {
 	appendstringtosvg(pSvg, "</svg>");
-	psvg->finalized = true;
+	pSvg->finalized = true;
 }
 
 void svg_free(Svg *pSvg)
@@ -62,7 +63,7 @@ void svg_save(Svg *pSvg, char *filepath)
 	}
 	
 	FILE *fp;
-	fp = fopen(filepath, 'w');
+	fp = fopen(filepath, "w");
 	if (fp != NULL) {
 		fwrite(pSvg->svg, 1, strlen(pSvg->svg), fp);
 		fclose(fp);
@@ -70,25 +71,25 @@ void svg_save(Svg *pSvg, char *filepath)
 }
 
 // Shapes
-void svg_rectangle(svg* psvg, int width, int height, int x, int y, char* fill, char* stroke, int strokewidth, int radiusx, int radiusy)
+void svg_rectangle(Svg* pSvg, int width, int height, int x, int y, char* fill, char* stroke, int strokewidth, int radiusx, int radiusy)
 {
-	appendstringtosvg(psvg, "    <rect fill='");
-	appendstringtosvg(psvg, fill);
-	appendstringtosvg(psvg, "' stroke='");
-	appendstringtosvg(psvg, stroke);
-	appendstringtosvg(psvg, "' stroke-width='");
-	appendnumbertosvg(psvg, strokewidth);
-	appendstringtosvg(psvg, "px' width='");
-	appendnumbertosvg(psvg, width);
-	appendstringtosvg(psvg, "' height='");
-	appendnumbertosvg(psvg, height);
-	appendstringtosvg(psvg, "' y='");
-	appendnumbertosvg(psvg, y);
-	appendstringtosvg(psvg, "' x='");
-	appendnumbertosvg(psvg, x);
-	appendstringtosvg(psvg, "' ry='");
-	appendnumbertosvg(psvg, radiusy);
-	appendstringtosvg(psvg, "' rx='");
-	appendnumbertosvg(psvg, radiusx);
-	appendstringtosvg(psvg, "' />\n");
+	appendstringtosvg(pSvg, "    <rect fill='");
+	appendstringtosvg(pSvg, fill);
+	appendstringtosvg(pSvg, "' stroke='");
+	appendstringtosvg(pSvg, stroke);
+	appendstringtosvg(pSvg, "' stroke-width='");
+	appendnumbertosvg(pSvg, strokewidth);
+	appendstringtosvg(pSvg, "px' width='");
+	appendnumbertosvg(pSvg, width);
+	appendstringtosvg(pSvg, "' height='");
+	appendnumbertosvg(pSvg, height);
+	appendstringtosvg(pSvg, "' y='");
+	appendnumbertosvg(pSvg, y);
+	appendstringtosvg(pSvg, "' x='");
+	appendnumbertosvg(pSvg, x);
+	appendstringtosvg(pSvg, "' ry='");
+	appendnumbertosvg(pSvg, radiusy);
+	appendstringtosvg(pSvg, "' rx='");
+	appendnumbertosvg(pSvg, radiusx);
+	appendstringtosvg(pSvg, "' />\n");
 }
