@@ -15,6 +15,7 @@ typedef struct svg {
 Svg *svg_create(int width, int height);
 void svg_finalize(Svg *pSvg);
 void svg_print(Svg *pSvg);
+void svg_save(Svg *pSvg, char *filepath);
 void svg_free(Svg *pSvg);
 void svg_circle(Svg *pSvg, char* stroke, int strokewidth, char* fill, int r, int cx, int cy);
 void svg_line(Svg *pSvg, char* stroke, int strokewidth, int x1, int y1, int x2, int y2);

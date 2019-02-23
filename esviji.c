@@ -55,4 +55,40 @@ void svg_free(Svg *pSvg)
 	free(pSvg);
 }
 
+void svg_save(Svg *pSvg, char *filepath)
+{
+	if(!pSvg->finalized) {
+		svg_finalize(pSvg);
+	}
+	
+	FILE *fp;
+	fp = fopen(filepath, 'w');
+	if (fp != NULL) {
+		fwrite(pSvg->svg, 1, strlen(pSvg->svg), fp);
+		fclose(fp);
+	}
+}
 
+// Shapes
+void svg_rectangle(svg* psvg, int width, int height, int x, int y, char* fill, char* stroke, int strokewidth, int radiusx, int radiusy)
+{
+	appendstringtosvg(psvg, "    <rect fill='");
+	appendstringtosvg(psvg, fill);
+	appendstringtosvg(psvg, "' stroke='");
+	appendstringtosvg(psvg, stroke);
+	appendstringtosvg(psvg, "' stroke-width='");
+	appendnumbertosvg(psvg, strokewidth);
+	appendstringtosvg(psvg, "px' width='");
+	appendnumbertosvg(psvg, width);
+	appendstringtosvg(psvg, "' height='");
+	appendnumbertosvg(psvg, height);
+	appendstringtosvg(psvg, "' y='");
+	appendnumbertosvg(psvg, y);
+	appendstringtosvg(psvg, "' x='");
+	appendnumbertosvg(psvg, x);
+	appendstringtosvg(psvg, "' ry='");
+	appendnumbertosvg(psvg, radiusy);
+	appendstringtosvg(psvg, "' rx='");
+	appendnumbertosvg(psvg, radiusx);
+	appendstringtosvg(psvg, "' />\n");
+}
