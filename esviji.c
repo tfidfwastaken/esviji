@@ -106,7 +106,7 @@ void svg_print(Svg *pSvg)
 
 void svg_line(Svg *pSvg, char* stroke, int strokewidth, int x1, int y1, int x2, int y2);
 {
-	appendstringtosvg(pSvg, "	<line stroke='");
+	appendstringtosvg(pSvg, "    <line stroke='");
 	appendstringtosvg(pSvg, stroke);
 	appendstringtosvg(pSvg, "'  stokewidth='");
 	appendstringtosvg(pSvg, stokewidth);
@@ -123,15 +123,15 @@ void svg_line(Svg *pSvg, char* stroke, int strokewidth, int x1, int y1, int x2, 
 
 void svg_text(Svg *pSvg, int x, int y, char *fontfamily, int fontsize, char *fill, char *stroke, char *text)
 {
-	appendstringtosvg(pSvg, "	<text x='");
+	appendstringtosvg(pSvg, "    <text x='");
 	appendstringtosvg(pSvg, x);
 	appendstringtosvg(pSvg, "' y='");
 	appendstringtosvg(pSvg, y);
-	appendstringtosvg(pSvg, "'	font-family='");
+	appendstringtosvg(pSvg, "'  font-family='");
 	appendstringtosvg(pSvg, fontfamily);
-	appendstringtosvg(pSvg, "'	stroke ='");
+	appendstringtosvg(pSvg, "'  stroke ='");
 	appendstringtosvg(pSvg, stroke);
-	appendstringtosvg(pSvg, "'	fill='");
+	appendstringtosvg(pSvg, "'  fill='");
 	appendstringtosvg(pSvg, fill);
 	appendstringtosvg(pSvg, " px'>");
 	appendstringtosvg(pSvg, text);
@@ -140,7 +140,7 @@ void svg_text(Svg *pSvg, int x, int y, char *fontfamily, int fontsize, char *fil
 
 void svg_circle(svg* pSvg, char* stroke, int strokewidth, char* fill, int r, int cx, int cy)
 {
-	appendstringtosvg(pSvg, "	<circle stroke='");
+	appendstringtosvg(pSvg, "    <circle stroke='");
 	appendstringtosvg(pSvg, stroke);
 	appendstringtosvg(pSvg, "' stoke-width='");
 	appendstringtosvg(pSvg, strokewidth);
@@ -156,7 +156,7 @@ void svg_circle(svg* pSvg, char* stroke, int strokewidth, char* fill, int r, int
 }
 void svg_ellipse(Svg *pSvg, int cx, int cy, int radiusx, int radiusy, char *width, char *stroke, int strokewidth);
 {
-	appendstringtosvg(pSvg, "	<ellipse cx='");
+	appendstringtosvg(pSvg, "    <ellipse cx='");
 	appendstringtosvg(pSvg, cx);
 	appendstringtosvg(pSvg, "' cy='");
 	appendstringtosvg(pSvg, cy);
