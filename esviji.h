@@ -22,4 +22,6 @@ void svg_line(Svg *pSvg, char* stroke, int strokewidth, int x1, int y1, int x2, 
 void svg_rectangle(Svg *pSvg, int width, int height, int x, int y, char *fill, char *stroke, int strokewidth, int radiusx, int radiusy);
 void svg_fill(Svg *pSvg, char *fill);
 void svg_text(Svg *pSvg, int x, int y, char *fontfamily, int fontsize, char *fill, char *stroke, char *text);
-void svg_ellipse(Svg *pSvg, int cx, int cy, int radiusx, int radiusy, char *width, char *stroke, int strokewidth);
+void svg_ellipse(Svg* pvg, int cx, int cy, int rx, int ry, char* fill, char* stroke, int strokewidth);
+void svg_polygon(int n, Svg* pSvg, int points[n][2], int strokewidth, char* stroke, char *fill);
+void svg_polyline(int n, Svg* pSvg, int points[n][2], int strokewidth, char* stroke, char *fill);
