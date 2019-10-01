@@ -91,14 +91,18 @@ void svg_rectangle(Svg* pSvg, int width, int height, int x, int y, char* fill, c
 	appendnumbertosvg(pSvg, radiusy);
 	appendstringtosvg(pSvg, "' rx='");
 	appendnumbertosvg(pSvg, radiusx);
-	appendstringtosvg(pSvg, "' filter='url(#");
-	appendstringtosvg(pSvg, filter);
-	appendstringtosvg(pSvg, ")' />\n");
+	if(filter[0] != '\0'){
+		appendstringtosvg(pSvg, "' filter='url(#");
+		appendstringtosvg(pSvg, filter);
+		appendstringtosvg(pSvg, ")");
+	}
+	appendstringtosvg(pSvg, "' />\n");
+
 }
 
 void svg_fill(Svg *pSvg, char *Fill)
 {
-	svg_rectangle(pSvg, pSvg->width, pSvg->height, 0, 0, Fill, Fill, 0, 0, 0, "");
+	svg_rectangle(pSvg, pSvg->width, pSvg->height, 0, 0, Fill, Fill, 0, 0, 0, "	");
 }
 
 void svg_print(Svg *pSvg)
