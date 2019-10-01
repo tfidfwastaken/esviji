@@ -71,7 +71,7 @@ void svg_save(Svg *pSvg, char *filepath)
 }
 
 // Shapes
-void svg_rectangle(Svg* pSvg, int width, int height, int x, int y, char* fill, char* stroke, int strokewidth, int radiusx, int radiusy)
+void svg_rectangle(Svg* pSvg, int width, int height, int x, int y, char* fill, char* stroke, int strokewidth, int radiusx, int radiusy, char *filter)
 {
 	appendstringtosvg(pSvg, "    <rect fill='");
 	appendstringtosvg(pSvg, fill);
@@ -91,17 +91,19 @@ void svg_rectangle(Svg* pSvg, int width, int height, int x, int y, char* fill, c
 	appendnumbertosvg(pSvg, radiusy);
 	appendstringtosvg(pSvg, "' rx='");
 	appendnumbertosvg(pSvg, radiusx);
-	appendstringtosvg(pSvg, "' />\n");
+	appendstringtosvg(pSvg, "' filter='url(#");
+	appendstringtosvg(pSvg, filter);
+	appendstringtosvg(pSvg, ")' />\n");
 }
 
 void svg_fill(Svg *pSvg, char *Fill)
 {
-	svg_rectangle(pSvg, pSvg->width, pSvg->height, 0, 0, Fill, Fill, 0, 0, 0);
+	svg_rectangle(pSvg, pSvg->width, pSvg->height, 0, 0, Fill, Fill, 0, 0, 0, "");
 }
 
 void svg_print(Svg *pSvg)
 {
-	printf("%s", pSvg->svg);
+	printf("%s\n", pSvg->svg);
 }
 
 void svg_line(Svg *pSvg, char* stroke, int strokewidth, int x1, int y1, int x2, int y2)
@@ -209,4 +211,19 @@ void svg_polyline(int n, Svg* pSvg, int points[n][2], int strokewidth, char* str
     appendstringtosvg(pSvg, "' stroke-width='");
     appendnumbertosvg(pSvg, strokewidth);
     appendstringtosvg(pSvg, "' />\n");
+}
+
+//filter
+void svg_filter(Svg *pSvg, char *id, int x, int y, int stddev)
+{
+	appendstringtosvg(pSvg, "    <filter id = '");
+	appendstringtosvg(pSvg, id);
+	appendstringtosvg(pSvg, "' x = '");
+	appendnumbertosvg(pSvg, x);
+	appendstringtosvg(pSvg, "' y = '");
+	appendnumbertosvg(pSvg, y);
+	appendstringtosvg(pSvg, "'>\n        <feGaussianBlur in=\"SourceGraphic\" stdDeviation='");
+	appendnumbertosvg(pSvg, stddev);
+	appendstringtosvg(pSvg, "' />\n");
+	appendstringtosvg(pSvg, "    </filter>\n");
 }
