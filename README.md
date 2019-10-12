@@ -23,3 +23,9 @@ svg_finalize(svg_img);
 svg_save(svg_img, "rectangle.svg");
 svg_free(svg_img); // To free allocated memory
 ```
+### Compilation and Running
+After making changes to the `test.c` file, run the commands:
+```
+make -f Makefile
+./a.out
+```

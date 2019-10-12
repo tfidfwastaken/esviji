@@ -16,9 +16,12 @@ void drawrectangles()
 	if (svg_img == NULL) {
 		puts("svg_img is NULL");
 	} else {
-		svg_rectangle(svg_img, 256, 256, 0, 20, "#123123", "#FFFFFF", 5, 2, 2);
+		svg_filter(svg_img, "idname", 0, 0, 15);
+		svg_rectangle(svg_img, 256, 256, 0, 0, "yellow", "#000000", 5, 2, 2, "idname");
+		svg_line(svg_img, "#000000", 2, 0, 0, 256, 256);
 		svg_finalize(svg_img);
 		svg_save(svg_img, "rectangle.svg");
+		svg_print(svg_img);
 		svg_free(svg_img);
 	}
 }
